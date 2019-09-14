@@ -49,11 +49,11 @@ if [ "${INPUT_SNAPSHOT}" == "true" ]; then
   timestamp=`date +%Y%m%d%H%M%S`
   shortSha=$(echo "${GITHUB_SHA}" | cut -c1-6)
   SHA_DOCKER_NAME="${INPUT_NAME}:${timestamp}${shortSha}"
-  docker build $BUILDPARAMS -t ${DOCKERNAME} -t ${SHA_DOCKER_NAME} .
+  docker build $BUILDPARAMS -t ${DOCKERNAME} -t ${SHA_DOCKER_NAME} ./${INPUT_PATH}/
   docker push ${DOCKERNAME}
   docker push ${SHA_DOCKER_NAME}
 else
-  docker build $BUILDPARAMS -t ${DOCKERNAME} .
+  docker build $BUILDPARAMS -t ${DOCKERNAME} ./${INPUT_PATH}/
   docker push ${DOCKERNAME}
 fi
 
